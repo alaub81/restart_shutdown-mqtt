@@ -1,5 +1,5 @@
 # restart_shutdown-mqtt
-This Python script restarts or shuts down a Linux system via MQTT Publish. The whole thing is ideal in combination with the Raspberry Pi, an openHAB installation and a touch display. In my scenario I can either restart the underlying or another Linux system via HABPanel or even turn it off completely. HABPanel sends the "reboot" or "shutdown" command via an openHAB item to the MQTT broker. The topic there is subscribed in a Python script that runs as a system daemon and then executes a reboot or halt accordingly.
+This Python script restarts or shuts down a Linux system via MQTT Publish. The whole thing is ideal in combination with the Raspberry Pi, an openHAB installation and a touch display. In my scenario I can either restart the underlying or another Linux system via HABPanel or even turn it off completely. HABPanel sends the "reboot" or "shutdown" command via an openHAB item to the MQTT broker. The topic there is subscribed in a Python script that runs as a system daemon and then executes a `reboot` or `halt accordingly.
 # Requirements
 * Linux System
 * Python3 Installation
