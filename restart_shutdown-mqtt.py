@@ -7,7 +7,7 @@ import paho.mqtt.client as mqtt, ssl
 broker = "FQDN / IP ADDRESS"
 port = 8883
 publish_topic="home/attic/office"
-clientid = "client-dp"
+clientid = "client-power"
 hostname = "clientname"
 username = "mosquitto"
 password = "password"
