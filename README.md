@@ -6,6 +6,8 @@ This Python script restarts or shuts down a Linux system via MQTT Publish. The w
 * Python3 Paho MQTT Library
 * MQTT Broker
 * Optional: openHAB Installation
+
+For Debian based Operating Systems:
 ```bash
 apt install -y python3 python3-paho-mqtt
 ```
@@ -18,14 +20,38 @@ cp restart_shutdown-mqtt/restart_shutdown.service /etc/systemd/system/
 chmod +x /usr/local/sbin/restart_shutdown-mqtt.py
 ```
 # Configuration
-
-# Editieren der Dateien
+Now you have to configure the MQTT connection in the `/usr/local/sbin/restart_shutdown-mqtt.py` script:
+```python3
+# MQTT Config
+broker = "FQDN / IP ADDRESS" # --> Broker FQDN or IP address
+port = 8883 # --> MQTT Broker TCP Port (8883 for the TLS Port, 1883 for the standard Port)
+publish_topic="home/attic/office" # --> in which topic you want to publish
+clientid = "client-dp" # --> MQTT Client ID, should be unique.
+hostname = "clientname" # --> In this topic the helping MQTT values are published (lux goes directly into the topic)
+username = "mosquitto" # --> MQTT username, if authentication is used
+password = "password" # --> MQTT password, if authentication is used
+insecure = True # --> if using a self signed certificate
+qos = 1 # --> MQTT QoS level (0, 1, 2) 
+retain_message = True # --> publish as a retained mqtt message (True, False)
+```
+And you have to edit the `/etc/systemd/system/display.service` if you are using the MQTT Broker in a Docker Container running on the same system
+```bash
+...
+# Only needed if MQTT Broker is running in a Docker Container on the same Host
+After=docker.service
+After=docker.socket
+```
+you can use `nano` for editing:
+```bash
 nano /etc/systemd/system/restart_shutdown.service
 nano /usr/local/sbin/restart_shutdown-mqtt.py
-# Aktivieren des Autostart
-systemctl enable restart_shutdown.service
-systemctl start restart_shutdown.service
-
+```
+now you could also enable and start the systemd service
+```bash
+systemd daemon-reload
+systemctl enable display.service
+systemctl start display.service
+```
 # Testing
 Check if the service is runnig:
 ```bash
