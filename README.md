@@ -60,7 +60,7 @@ systemctl status restart_shutdown.service
 Send 'reboot' or 'shutdown' via MQTT publish to your choiced topic.
 
 # Whole Documentation of that Project:
-More Informations here (Sorry, it's german, but just use your browsers transaltion tool): [Python_MQTT_System_Restart_und_Shutdown_Script](https://www.laub-home.de/wiki/Python_MQTT_System_Restart_und_Shutdown_Script)
+More Informations here (Sorry, it's german, but just use your browsers transaltion tool): [Python MQTT System Restart und Shutdown Script](https://www.laub-home.de/wiki/Python_MQTT_System_Restart_und_Shutdown_Script)
 
 # Questions, Help, Feedback
 If you have any questions, you need help, or just have feedback for my first project here, just let me know!
