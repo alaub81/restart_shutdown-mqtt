@@ -4,7 +4,6 @@ import paho.mqtt.client as mqtt, ssl
 
 ### set the variables
 # MQTT Config
-# MQTT Config
 broker = "FQDN / IP ADDRESS"
 port = 8883
 mqttclientid = "client-power-homie"
@@ -31,7 +30,7 @@ def publish(topic, payload):
 
 def on_connect(client, userdata, flags, rc):
   print("MQTT Connection established, Returned code=",rc)
-  client.subscribe("homie/" + clientid + "/" + nodes + "/systempowerswitch/#", qos)
+  client.subscribe("homie/" + clientid + "/" + nodes + "/systempowerswitch/set", qos)
   # homie client config
   publish("$state","init")
   publish("$homie","4.0")
@@ -54,11 +53,6 @@ def on_message(client, userdata, message):
   if "systempowerswitch/set" in message.topic:
     #print("MQTT system power set payload:", str(message.payload.decode("utf-8")))
     powerswitch = str(message.payload.decode("utf-8"))
-"""
-  if message.topic == ("homie/" + clientid + "/" + nodes + "/systempowerswitch"):
-    powerstate = str(message.payload.decode("utf-8"))
-    print("MQTT system power state payload:", str(message.payload.decode("utf-8")))
-"""
 
 def on_disconnect(client, userdata, rc):
   print("MQTT Connection disconnected, Returned code=",rc)
@@ -96,12 +90,20 @@ while True:
   try:
     #print("powerswitch Loop wert: ", powerswitch)
     if powerswitch == "shutdown":
-      publish(nodes + "/systempowerswitch/set", "")
+      powerswitch = "Null"
       print("System Shutdown")
+      publish("$state","disconnected")
+      publish(nodes + "/systempowerswitch", "off")
+      client.disconnect()
+      client.loop_stop()
       os.system('halt')
     elif powerswitch == "reboot":
-      publish(nodes + "/systempowerswitch/set", "")
+      powerswitch = "Null"
       print("System Reboot")
+      publish("$state","disconnected")
+      publish(nodes + "/systempowerswitch", "reboot")
+      client.disconnect()
+      client.loop_stop()
       os.system('reboot')
     time.sleep(1)
 
