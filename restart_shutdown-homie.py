@@ -7,7 +7,7 @@ import paho.mqtt.client as mqtt, ssl
 broker = "FQDN / IP ADDRESS"
 port = 8883
 mqttclientid = "client-power-homie"
-clientname="clientname"
+clientname="clientname Power"
 clientid = "clientname-power"
 nodes="power"
 username = "mosquitto"
