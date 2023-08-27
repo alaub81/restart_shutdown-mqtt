@@ -41,7 +41,8 @@ def on_connect(client, userdata, flags, rc):
   publish(nodes + "/$properties","systempowerswitch")
   publish(nodes + "/systempowerswitch", "on")
   publish(nodes + "/systempowerswitch/$name","System Power Switch")
-  publish(nodes + "/systempowerswitch/$datatype","string")
+  publish(nodes + "/systempowerswitch/$datatype","enum")
+  publish(nodes + "/systempowerswitch/$format","shutdown,reboot")
   publish(nodes + "/systempowerswitch/$retained","true")
   publish(nodes + "/systempowerswitch/$settable","true")
   # homie stae ready
