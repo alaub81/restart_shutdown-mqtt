@@ -37,7 +37,7 @@ insecure = True # --> if using a self signed certificate
 qos = 1 # --> MQTT QoS level (0, 1, 2) 
 retain_message = True # --> publish as a retained mqtt message (True, False)
 ```
-And you have to edit the `/etc/systemd/system/display.service` if you are using the MQTT Broker in a Docker Container running on the same system
+And you have to edit the `/etc/systemd/system/restart_shutdown.service` if you are using the MQTT Broker in a Docker Container running on the same system
 ```bash
 ...
 # Only needed if MQTT Broker is running in a Docker Container on the same Host
@@ -51,9 +51,9 @@ nano /usr/local/sbin/restart_shutdown-mqtt.py
 ```
 now you could also enable and start the systemd service
 ```bash
-systemd daemon-reload
-systemctl enable display.service
-systemctl start display.service
+systemctl daemon-reload
+systemctl enable restart_shutdown.service
+systemctl start restart_shutdown.service
 ```
 # Testing
 Check if the service is runnig:
