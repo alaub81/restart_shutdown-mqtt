@@ -9,7 +9,7 @@ This Python script restarts or shuts down a Linux system via MQTT Publish. The w
 
 For Debian based Operating Systems:
 ```bash
-apt install -y python3 python3-paho-mqtt
+apt install -y python3 python3-paho-mqtt python3-systemd
 ```
 # Optional: Homie convention MQTT Script
 There is also a version of the script which publishes the MQTT Topics as Homie conventional. So for example, if you are using openHAB, there will be a autodiscovery of the MQTT Device. Just use the `restart_shutdown-homie.py` script instead of `restart_shutdown-mqtt.py` and change the systemd Service file, `restart_shutdown.service`.
